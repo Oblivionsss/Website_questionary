@@ -10,10 +10,10 @@ class QuestionModelTests(TestCase):
 
 	def test_was_published_recently_with_future_question(self):
 		"""
-		was_published_recently() return False for questions whose
+		was_publishied_recently() return False for questions whose
 		pub_date is in the Future.
 		"""
 		time = timezone.now() + datetime.timedelta(days=30)
 		future_questions = Question(pub_date=time)
-		self.assertIs(test_was_published_recently_with_future_question(), False)
-		
+		self.assertIs(future_questions.was_publishied_recently(), False)
+
