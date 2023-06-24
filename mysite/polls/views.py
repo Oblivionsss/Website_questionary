@@ -1,3 +1,5 @@
+from typing import Any
+from django.db import models
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -12,7 +14,7 @@ class IndexView(generic.ListView):
 	context_object_name = 'latest_question_list'
 
 	def get_queryset(self):
-		"""return the last five published questions."""
+		"""Return the last five published questions."""
 		return Question.objects.filter(
 			pub_date__lte=timezone.now()
 		).order_by('-pub_date')[:5]
@@ -21,6 +23,10 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
 	model = Question
 	template_name = 'polls/detail.html'
+
+	def get_queryset(self):
+		"""Return recently question."""
+		return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):

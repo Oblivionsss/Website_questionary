@@ -8,6 +8,7 @@ from .models import Question
 
 
 class QuestionModelTests(TestCase):
+
 	def test_was_published_recently_with_future_question(self):
 		"""
 		was_publishied_recently() return False for questions whose
@@ -91,7 +92,20 @@ class QuestionIndexViewTests(TestCase):
 			response.context['latest_question_list'],
 			[question2, question1],
 		)
- 
 
 
-
+class QuestionDetaulViewTests(TestCase):
+	def test_future_question(self):
+		"""The detail view get status code 404 for the future question """
+		future_question = create_question(question_text='Future question.', days=5)
+		url = reverse('polls:detail', args=(future_question.id,))
+		response = self.client.get(url)
+		self.assertEqual(response.status_code, 404)
+	
+	def test_past_question(self):
+		"""The detail view get question with past pub date """
+		question = create_question(question_text="past", days=-33)
+		response = self.client.get(reverse('polls:detail', args=(question.id, )))
+		self.assertContains(response, question.question_text)
+	
+	
