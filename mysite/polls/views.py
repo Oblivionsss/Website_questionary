@@ -15,7 +15,9 @@ class IndexView(generic.ListView):
 
 	def get_queryset(self):
 		"""Return the last five published questions."""
-		all_question = Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice=None).order_by('-pub_date')[:5]
+		all_question = Question.objects.filter(
+			pub_date__lte=timezone.now()
+			).exclude(choice=None).order_by('-pub_date')[:5]
 		return all_question
 
 class DetailView(generic.DetailView):
@@ -51,7 +53,10 @@ def vote(request, question_id):
 		# Always return an HttpResposeRedirect after succesfully dealing
 		# with POST data. This prevent data from being posted twice if a
 		# user hits the Back button
-		return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+		return HttpResponseRedirect(reverse(
+			'polls:results', 
+			args=(question.id,))
+			)
 
 
 
