@@ -13,7 +13,7 @@ Templates: шаблоны для рендеринга интерфейса.
 Models: определение схем данных и бизнес-логики.
 Views: обработчики запросов, взаимодействующие с моделями и передающие данные в шаблоны.
 # Инструкция по установке и запуску:
-Склонируйте репозиторий: git clone git@github.com:<your_username>/my-poll-app.git
+Склонируйте репозиторий: git clone git@github.com:Oblivionsss/my-poll-app.git
 # Установите виртуальное окружение и требуемые пакеты: 
 python -m venv env;
 source env/bin/activate;
